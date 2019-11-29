@@ -5,7 +5,7 @@ Library for Arduino 4x4 keypad. Uses four OUTPUT pins and four INPUT_PULLUP pins
 
 Public:
 enum State
-	Button states. There is Three possible button states.
+	Button states. There is three possible button states.
 Idle: key is not pressed.
 WaitRepeat: key is pressed and waits to expire repeat interval.
 WaitDelay: key is pressed, repeat interval is expired and waits for delay interval to expire.
@@ -22,13 +22,13 @@ void Kbd::scan()
 	Scans a keypad to check if there was key press. If key is pressed check if there was debounce and encode key character by calling void Kbd::getChar(int, int, bool).
 
 void Kbd::getChar(int i, int j, bool input)
-	If there were some input at corresponding row pin and State of pressed button is higher than State of other buttons, function updates Kbd object's state (void Kbd::updateState(int, int, State)) corresponding to current button state (bool Kbd::checkState(State state)). If there were no input or corresponding button is in lower state than some other button just sets button State to default.
+	If there were some input at corresponding row pin and State of pressed button is higher than State of other buttons (bool Kbd::checkState(State state)), function updates Kbd object's state (void Kbd::updateState(int, int, State)) corresponding to current button state. If there were no input or corresponding button is in lower state than some other button just sets button State to default.
 
 void Kbd::updateState(int i, int j, State state)
 	Updates Kbd's object state. Sets button state, timer, key char and sets keyAvailable to true.
 
 bool Kbd::checkState(State state)
-	Goes through buttons state matrix and checks if there is button with higher state. If finds any button with higher state return true, otherwise return false.
+	Goes through buttons state matrix and checks if there is button with higher state. If finds any return true, otherwise return false.
 
 void Kbd::setupPins()
 	Sets all row pins to INPUT_PULLUP.
